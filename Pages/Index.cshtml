@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Inicio";
+    
+}
+@section Styles{
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true">
+}
+
+<!-- Contenedor personalizado que ocupa solo el alto restante -->
+<div class="fondo-gradiente d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <div class="text-center px-3 text-white">
+        <h1 class="display-3 fw-bold">DevelopersHub</h1>
+        <p class="lead fs-4 my-3">Sitio creado para desarrolladores, convive con una extensa comunidad que crece y se apoya mutuamente.</p>
+
+        <div class="mt-3">
+            <a asp-page="/Registro" class="btn btn-light btn-lg me-2">Registrarse</a>
+            <a asp-page="/Login" class="btn btn-primary btn-lg">Iniciar sesión</a>
+        </div>
+    </div>
+</div>

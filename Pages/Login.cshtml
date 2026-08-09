@@ -1,0 +1,59 @@
+﻿@page
+@model DevelopersHub.Pages.LoginModel
+@{
+    ViewData["Title"] = "Iniciar sesion";
+}
+
+<div class="fondo-gradiente d-flex align-items-center justify-content-center min-vh-100">
+    <!-- Botón para regresar a Index -->
+    <a asp-page="/Index"
+       class="btn btn-outline-light position-absolute top-0 start-0 m-4 d-flex align-items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>
+        Regresar
+    </a>
+
+    <div class="d-flex flex-row align-items-center gap-4 bg-white p-5 shadow" style="border-radius: 20px;">
+        <div class="d-flex flex-column">
+            <h2>Ingresa tus datos: </h2>
+            <form class="d-flex flex-column gap-2" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+                <div>
+                    <label asp-for="Input.Username" class="form-label">Usuario:</label>
+                    <input asp-for="Input.Username" class="form-control" />
+                    <!-- Error flotante -->
+                    <div style="min-height: 24px;">
+                        <span asp-for="Input.Username" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <label asp-for="Input.Password" class="form-label">Contraseña:</label>
+                    <input asp-for="Input.Password" type="password" class="form-control" />
+                    <div style="min-height: 24px;">
+                        <span asp-for="Input.Password" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="form-check my-2">
+                    <input asp-for="Input.RememberMe" class="form-check-input" />
+                    <label asp-for="Input.RememberMe" class="form-check-label">Recordarme</label>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary btn-lg mt-3">Entrar</button>
+            </form>
+        </div>
+
+        <h3 class="text-muted px-2">ó</h3>
+
+        <div class="d-flex flex-column">
+            <h2>Accede con estas opciones</h2>
+
+        </div>
+    </div>
+</div>
+    

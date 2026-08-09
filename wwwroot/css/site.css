@@ -1,0 +1,14 @@
+/* Sobrescribir la variable global de Bootstrap 5 */
+:root {
+    --bs-body-font-family: "Inconsolate", monospace;
+}
+
+/* Aplicar la fuente al cuerpo de la aplicación */
+body {
+    font-family: var(--bs-body-font-family);
+}
+
+.fondo-gradiente {
+background: #0a0a0a;
+background: linear-gradient(0deg, rgba(10, 10, 10, 1) 0%, rgba(41, 41, 41, 1) 100%);
+}
