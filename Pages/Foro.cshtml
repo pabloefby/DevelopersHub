@@ -1,18 +1,94 @@
 ﻿@page
 @model DevelopersHub.Pages.ForoModel
 @{
+    ViewData["Title"] = "Foro";
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/Foro.css">
 }
-<div class="d-flex flex-column min-vh-100"> 
+<div class="d-flex flex-column min-vh-100">
     <partial name="_Navbar"></partial>
-    <div class="fondo-gradiente d-flex flex-column align-items-center justify-content-center flex-grow-1">
-        <h1>Bienvenido al foro</h1>
+
+        <div class="fondo-gradiente d-flex flex-column flex-grow-1 py-5">
+            <div class="container" style="max-width: 800px;">
+
+                <!-- Encabezado con Botón -->
+                <div class="d-flex justify-content-between align-items-center text-white mb-4">
+                    <h3 class="mb-0 fw-bold">Bienvenido al foro</h3>
+                    <button type="button" class="btn btn-primary shadow-sm" data-bs-toggle="modal"
+                            data-bs-target="#publicacionModal">Crear publicación</button>
+                </div>
+
+                <!-- Lista de Publicaciones -->
+                <div class="d-flex flex-column gap-3">
+
+                    @if (Model.Publicaciones.Any())
+                    {
+                        foreach (var publicacion in Model.Publicaciones)
+                        {
+                            <div class="card-publicacion bg-white p-4 rounded-3 shadow-sm">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge bg-secondary">@(publicacion.Usuario?.UserName)</span>
+                                    <small class="text-muted">@(publicacion.FechaCreacion.ToLocalTime().ToString("dd/MM/yyyy HH:mm"))</small>
+                                </div>
+                                <h5 class="fw-bold text-dark">@(publicacion.Titulo)</h5>
+                                <p class="text-secondary mb-0">
+                                    @(publicacion.Contenido)
+                                </p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="bg-white p-4 rounded-3 shadow-sm text-center text-muted">
+                            Aún no hay publicaciones. ¡Sé el primero en crear una!
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
     </div>
 
-</div>
+    <div class="modal fade" id="publicacionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva publicación</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="Input.Titulo" class="col-form-label">Título:</label>
+                            <input asp-for="Input.Titulo" class="form-control" required />
+                            <span asp-validation-for="Input.Titulo" class="text-danger small"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Input.Contenido" class="col-form-label">Contenido:</label>
+                            <textarea asp-for="Input.Contenido" class="form-control" rows="4" required></textarea>
+                            <span asp-validation-for="Input.Contenido" class="text-danger small"></span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Publicar</button>
+                        </div>
+                    </form>
+                </div>
 
+            </div>
+        </div>
+    </div>
 
+    <script>
+        const publicacionModal = document.getElementById('publicacionModal')
+        if (publicacionModal) {
+            publicacionModal.addEventListener('show.bs.modal', event => {
 
+                const button = event.relatedTarget
+
+            })
+        }
+    </script>
 

@@ -11,5 +11,7 @@ namespace DevelopersHub.Data
         {
         }
 
+        public DbSet<Publicacion>Publicaciones {get; set;}
+
     }
 }

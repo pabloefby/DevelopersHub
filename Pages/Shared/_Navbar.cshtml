@@ -5,15 +5,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white w-100 sticky-top border-bottom px-3">
   <div class="container-fluid">
-    
+
     <div class="d-flex align-items-center gap-3">
-      <a class="navbar-brand fw-bold mb-0 text-dark">DevelopersHub</a>
-      
-      <ul class="navbar-nav flex-row gap-2">
-        <li class="nav-item">
-          <a class="nav-link text-dark fw-semibold" asp-page="/Foro">Foro</a>
-        </li>
-      </ul>
+      <a class="navbar-brand fw-bold mb-0 text-dark">DevelopersHub &lt;/&gt;</a>
     </div>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
@@ -21,29 +15,37 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+    <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
+
+      <ul class="navbar-nav flex-row gap-2">
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-semibold" asp-page="/Foro">Foro</a>
+        </li>
+      </ul>
+
+      
       <div class="navbar-nav align-items-center gap-2 mt-2 mt-lg-0">
+
         @if (SignInManager.IsSignedIn(User))
         {
           <div class="dropdown">
-            <button class="btn btn-outline-primary dropdown-toggle d-flex align-items-center gap-2" 
-                    type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-outline-primary dropdown-toggle d-flex align-items-center gap-2" type="button"
+                    id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-person-circle"></i>
               <span>@User.Identity?.Name</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
               <li>
+                <button class="dropdown-item ">Perfil</button>
+              </li>
+              <li>
                 <form class="form-inline" asp-page="/Logout" method="post">
                   <button type="submit" class="dropdown-item text-danger">Cerrar Sesión</button>
                 </form>
               </li>
+
             </ul>
           </div>
-        }
-        else
-        {
-          <a class="btn btn-outline-primary btn-sm" asp-page="/Login">Iniciar Sesión</a>
-          <a class="btn btn-primary btn-sm" asp-page="/Registro">Registrarse</a>
         }
       </div>
     </div>

@@ -23,6 +23,12 @@ builder.Services.AddIdentity<Usuario, IdentityRole>(options =>
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Login"; 
+    options.AccessDeniedPath = "/Index"; 
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
