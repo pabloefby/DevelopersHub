@@ -4,6 +4,7 @@ using DevelopersHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevelopersHub.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260811213926_AgregarCategoriasYDataSeeding")]
+    partial class AgregarCategoriasYDataSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,15 +33,9 @@ namespace DevelopersHub.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ColorHexa")
-                        .IsRequired()
-                        .HasMaxLength(7)
-                        .HasColumnType("nvarchar(7)");
-
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -53,56 +50,48 @@ namespace DevelopersHub.Migrations
                         new
                         {
                             Id = 1,
-                            ColorHexa = "#019fce",
                             Descripcion = "Dudas y tips sobre cómo llevar tu carrera",
                             Nombre = "Career Path"
                         },
                         new
                         {
                             Id = 2,
-                            ColorHexa = "#01aca6",
                             Descripcion = "Desarrollo del lado del servidor, APIs y lógica de negocio",
                             Nombre = "Back-end"
                         },
                         new
                         {
                             Id = 3,
-                            ColorHexa = "#7fb539",
                             Descripcion = "Diseño de interfaces, componentes y experiencia de usuario",
                             Nombre = "Front-end"
                         },
                         new
                         {
                             Id = 4,
-                            ColorHexa = "#ffd401",
                             Descripcion = "Consultas, modelado SQL, NoSQL y optimización",
                             Nombre = "Bases de datos"
                         },
                         new
                         {
                             Id = 5,
-                            ColorHexa = "#fa9d1c",
                             Descripcion = "Despliegues, CI/CD, Docker, Linux y proveedores en la nube",
                             Nombre = "DevOps & Cloud"
                         },
                         new
                         {
                             Id = 6,
-                            ColorHexa = "#c61935",
                             Descripcion = "Buenas prácticas de seguridad, autenticación, JWT y protección de APIs",
                             Nombre = "Ciberseguridad"
                         },
                         new
                         {
                             Id = 7,
-                            ColorHexa = "#f598aa",
                             Descripcion = "Muestra tus proyectos personales y recibe feedback de la comunidad",
                             Nombre = "Showcase / Proyectos"
                         },
                         new
                         {
                             Id = 8,
-                            ColorHexa = "#6950a1",
                             Descripcion = "Charlas casuales, tecnología en general, setups y comunidad",
                             Nombre = "Off-Topic"
                         });

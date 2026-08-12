@@ -6,3 +6,19 @@
 .card-publicacion:hover{
     transform: scale(1.05);
 }
+
+.categoria-pill {
+    border-color: var(--cat-color) !important;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
+}
+
+.categoria-pill:hover {
+    background-color: var(--cat-color) !important;
+    color: #fff !important;
+}
+
+.btn-check:checked + .categoria-pill {
+    background-color: var(--cat-color) !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.125);
+}

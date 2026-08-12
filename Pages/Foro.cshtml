@@ -29,6 +29,7 @@
                             <div class="card-publicacion bg-white p-4 rounded-3 shadow-sm">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-secondary">@(publicacion.Usuario?.UserName)</span>
+                                    <span class="badge bg-primary me-2" style="background-color: @(publicacion.Categoria?.ColorHexa)!important">@publicacion.Categoria?.Nombre</span>
                                     <small class="text-muted">@(publicacion.FechaCreacion.ToLocalTime().ToString("dd/MM/yyyy HH:mm"))</small>
                                 </div>
                                 <h5 class="fw-bold text-dark">@(publicacion.Titulo)</h5>
@@ -51,44 +52,50 @@
         </div>
     </div>
 
-    <div class="modal fade" id="publicacionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva publicación</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post">
-                        <div class="mb-3">
-                            <label asp-for="Input.Titulo" class="col-form-label">Título:</label>
-                            <input asp-for="Input.Titulo" class="form-control" required />
-                            <span asp-validation-for="Input.Titulo" class="text-danger small"></span>
+<div class="modal fade" id="publicacionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-light">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva publicación</h1>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label d-block">Categoría</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var cat in Model.Categorias)
+                            {
+                                <input type="radio" class="btn-check" asp-for="Input.CategoriaId" value="@cat.Id"
+                                       id="cat-@cat.Id" required>
+                                <label class="btn btn-outline-secondary categoria-pill" for="cat-@cat.Id"
+                                       style="--cat-color: @cat.ColorHexa;">
+                                    @cat.Nombre
+                                </label>
+                            }
                         </div>
-                        <div class="mb-3">
-                            <label asp-for="Input.Contenido" class="col-form-label">Contenido:</label>
-                            <textarea asp-for="Input.Contenido" class="form-control" rows="4" required></textarea>
-                            <span asp-validation-for="Input.Contenido" class="text-danger small"></span>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Publicar</button>
-                        </div>
-                    </form>
-                </div>
+                        <span asp-validation-for="Input.CategoriaId" class="text-danger small"></span>
+                    </div>
 
+                    <div class="mb-3">
+                        <label asp-for="Input.Titulo" class="col-form-label">Título:</label>
+                        <input asp-for="Input.Titulo" class="form-control" required />
+                        <span asp-validation-for="Input.Titulo" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Contenido" class="col-form-label">Contenido:</label>
+                        <textarea asp-for="Input.Contenido" class="form-control" rows="6" required></textarea>
+                        <span asp-validation-for="Input.Contenido" class="text-danger small"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Publicar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        const publicacionModal = document.getElementById('publicacionModal')
-        if (publicacionModal) {
-            publicacionModal.addEventListener('show.bs.modal', event => {
-
-                const button = event.relatedTarget
-
-            })
-        }
-    </script>
 

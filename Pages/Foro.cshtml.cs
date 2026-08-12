@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevelopersHub.Pages
 {
@@ -23,32 +25,44 @@ namespace DevelopersHub.Pages
             _userManager = userManager;
         }
 
-        public List<Publicacion> Publicaciones {get; set;} = new ();
-
-        [BindProperty]
-        public InputModel Input {get; set;} = new();
-        public class InputModel
-        {
-            public string Titulo {get; set;} = string.Empty;
-            public string Contenido {get; set;} = string.Empty;
-        }
+        public List<Publicacion> Publicaciones { get; set; } = new();
+        public List<Categoria> Categorias { get; set; } = default!;
 
         private async Task CargarPublicacionesAsync()
         {
             Publicaciones = await _context.Publicaciones
             .Include(p => p.Usuario)
+            .Include(p => p.Categoria)
             .OrderByDescending(p => p.FechaCreacion)
             .ToListAsync();
         }
+        private async Task CargarCategoriasPublicacionAsync()
+        {
+            Categorias = await _context.Categorias.ToListAsync();
+        }
+
+
         public async Task OnGetAsync()
         {
             await CargarPublicacionesAsync();
+            await CargarCategoriasPublicacionAsync();
         }
 
+
+        [BindProperty]
+        public InputModel Input { get; set; } = new();
+        public class InputModel
+        {
+            [Required]
+            public int CategoriaId { get; set; }
+            public string Titulo { get; set; } = string.Empty;
+            public string Contenido { get; set; } = string.Empty;
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
+                await CargarPublicacionesAsync();
                 await CargarPublicacionesAsync();
                 return Page();
             }
@@ -63,6 +77,7 @@ namespace DevelopersHub.Pages
             {
                 Titulo = Input.Titulo,
                 Contenido = Input.Contenido,
+                CategoriaId = Input.CategoriaId,
                 FechaCreacion = DateTime.UtcNow,
                 UsuarioId = userId
             };

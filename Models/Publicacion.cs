@@ -16,6 +16,9 @@ namespace DevelopersHub.Models
 
         public DateTime FechaCreacion {get; set;} = DateTime.UtcNow;
 
+        public int CategoriaId { get; set; }
+        public Categoria? Categoria {get;set;}
+
         public string UsuarioId {get;set;} = string.Empty;
         public Usuario? Usuario {get; set;}
         
